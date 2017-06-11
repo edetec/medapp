@@ -26,10 +26,9 @@ public class MedicalSpecialtyDao extends AbstractDao {
 		session.close();
 	}
 
-	public List<MedicalSpecialty> list() {
+	public List<MedicalSpecialty> listAll() {
 		return openSession().createQuery("from MedicalSpecialty").getResultList();
 	}
-
 
 	public void delete(Long id) {
 		Session session = openSession();
@@ -41,5 +40,10 @@ public class MedicalSpecialtyDao extends AbstractDao {
 
 	public MedicalSpecialty get(Long id) {
 		return openSession().get(MedicalSpecialty.class, id);
+	}
+
+	public List<MedicalSpecialty> listByDescription(String description) {
+		return openSession().createQuery("from MedicalSpecialty s Where lower(s.description) like :description")
+				.setParameter("description", description.toLowerCase() + "%").getResultList();
 	}
 }
