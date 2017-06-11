@@ -15,5 +15,6 @@
 		<property name="use_sql_comments">true</property>
 
 		<mapping class="io.github.edetec.medical.model.entity.Patient" />
+		<mapping class="io.github.edetec.medical.model.entity.MedicalSpecialty" />
 	</session-factory>
 </hibernate-configuration>
