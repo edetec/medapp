@@ -1,4 +1,4 @@
-var MedApp = angular.module('MedApp', ['ui.bootstrap', 'ui.router', 'ngCookies', 'ngBootbox']);
+var MedApp = angular.module('MedApp', ['ui.bootstrap', 'ui.router', 'ngCookies', 'ngBootbox', 'checklist-model']);
 
 MedApp.config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
