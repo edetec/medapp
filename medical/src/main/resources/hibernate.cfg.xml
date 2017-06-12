@@ -8,7 +8,7 @@
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">postgres123</property>
 
-		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.hbm2ddl.auto">create-drop</property>
 		<property name="hibernate.connection.autocommit">false</property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
@@ -16,5 +16,6 @@
 
 		<mapping class="io.github.edetec.medical.model.entity.Patient" />
 		<mapping class="io.github.edetec.medical.model.entity.MedicalSpecialty" />
+		<mapping class="io.github.edetec.medical.model.entity.Medic"/>
 	</session-factory>
 </hibernate-configuration>

@@ -17,5 +17,6 @@
 
 		<mapping class="io.github.edetec.medical.model.entity.Patient" />
 		<mapping class="io.github.edetec.medical.model.entity.MedicalSpecialty" />
+		<mapping class="io.github.edetec.medical.model.entity.Medic" />
 	</session-factory>
 </hibernate-configuration>

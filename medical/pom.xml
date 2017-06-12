@@ -37,6 +37,7 @@
 			<version>${jersey.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<!-- JPA -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -80,10 +81,6 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-			<resource>
-				<directory>src/test/resources</directory>
 				<filtering>true</filtering>
 			</resource>
 		</resources>
