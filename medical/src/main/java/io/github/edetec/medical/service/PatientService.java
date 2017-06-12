@@ -26,7 +26,6 @@ public class PatientService {
 	private PatientBus bus = new PatientBus();
 	
 	@GET
-	@QueryParam("{name}")
 	public List<Patient> fetchByName(@QueryParam("name") String name){
 		if(name == null){
 			return bus.fetchAll();

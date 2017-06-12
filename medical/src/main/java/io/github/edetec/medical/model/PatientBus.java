@@ -26,7 +26,7 @@ public class PatientBus {
 			throw new BussnessException("CPF attribute is invalid");
 		}
 		
-		if(dao.findByCpf(patient.getCpf()) != null){
+		if(dao.exists(patient.getCpf())){
 			throw new BussnessException("This CPF has already been registered");
 		}
 

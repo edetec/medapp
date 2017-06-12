@@ -86,7 +86,7 @@ public class PatientServiceTest extends JerseyTest {
 		assertEquals("Should return status 204", 204, output.getStatus());
 		
 		Patient patientCpf = dao.findByCpf(patient.getCpf());
-		assertNotNull("Shold return patients", patientCpf);
+		assertEquals("Shold return patients", null, patientCpf);
 	}
 	
 	@Test
