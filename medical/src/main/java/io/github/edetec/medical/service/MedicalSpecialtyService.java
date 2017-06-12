@@ -26,7 +26,6 @@ public class MedicalSpecialtyService {
 	private MedicalSpecialtyBus bus = new MedicalSpecialtyBus();
 
 	@GET
-	@QueryParam("{description}")
 	public List<MedicalSpecialty> fetchAll(@QueryParam("description") String description) {
 		if (description == null) {
 			return bus.fetchAll();

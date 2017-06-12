@@ -1,9 +1,12 @@
 package io.github.edetec.medical.model.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class MedicalSpecialty {
@@ -12,6 +15,8 @@ public class MedicalSpecialty {
 	private Long id;
 	@Column(unique = true)
 	private String description;
+//	@ManyToMany(mappedBy="specialties")
+//	private List<Medic> medics;
 
 	public Long getId() {
 		return id;

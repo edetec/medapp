@@ -36,7 +36,7 @@ function SpecialtyCtrl($scope, SpecialtyService, $ngBootbox) {
     };
     
     $scope.delete = function(specialty){
-    	$ngBootbox.confirm("Are you sure you want to exclude the specialty " + specialty.name +"?")
+    	$ngBootbox.confirm("Are you sure you want to exclude the specialty " + specialty.description +"?")
         .then(function() {
             deleteSpecialty(specialty);
         });
@@ -59,7 +59,7 @@ function SpecialtyCtrl($scope, SpecialtyService, $ngBootbox) {
 	
     
     var deleteSpecialty = function(specialty){
-		SpecialtyService.delete(specialty.cpf).success(
+		SpecialtyService.delete(specialty.id).success(
 	       function(data) {
 	          $scope.specialties.splice($scope.specialties.lastIndexOf(specialty),1);
 	       }).error(errorCallback);
