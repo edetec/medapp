@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class MedicalSpecialty {
@@ -15,8 +18,9 @@ public class MedicalSpecialty {
 	private Long id;
 	@Column(unique = true)
 	private String description;
-//	@ManyToMany(mappedBy="specialties")
-//	private List<Medic> medics;
+	@ManyToMany(mappedBy="specialties", fetch=FetchType.LAZY)
+	@JsonIgnore
+	private List<Medic> medics;
 
 	public Long getId() {
 		return id;
@@ -32,6 +36,14 @@ public class MedicalSpecialty {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<Medic> getMedics() {
+		return medics;
+	}
+
+	public void setMedics(List<Medic> medics) {
+		this.medics = medics;
 	}
 
 	@Override

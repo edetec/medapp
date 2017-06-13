@@ -30,4 +30,8 @@ public class MedicalSpecialtyBus {
 		return dao.listByDescription(description);
 	}
 
+	public MedicalSpecialty findById(Long id) {
+		return dao.get(id);
+	}
+
 }

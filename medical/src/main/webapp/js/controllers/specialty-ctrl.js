@@ -8,6 +8,7 @@ function SpecialtyCtrl($scope, SpecialtyService, $ngBootbox) {
     $scope.specialties = [];
     $scope.selected = null;
     $scope.description = '';
+    $scope.collapse = {};
     
     $scope.newSpecialty = function(){
     	$scope.selected = null;
@@ -41,6 +42,22 @@ function SpecialtyCtrl($scope, SpecialtyService, $ngBootbox) {
             deleteSpecialty(specialty);
         });
     }
+	
+    
+    $scope.fetch = function() {
+        SpecialtyService.getAll($scope.description).success(
+           function(data, status, headers, config) {
+              $scope.specialties = data;
+           }).error(errorCallback);
+    };
+    
+    $scope.showMedics = function(specialty){
+     	 $scope.collapse[specialty.id] = !$scope.collapse[specialty.id];
+    	 SpecialtyService.getMedics(specialty.id).success(
+           function(data, status, headers, config) {
+           		specialty.medics = data;
+           }).error(errorCallback);
+    };
 
     var errorCallback = function(data, status, headers, config) {
         switch (status) {
@@ -56,20 +73,12 @@ function SpecialtyCtrl($scope, SpecialtyService, $ngBootbox) {
         }
     	console.log(data, status);
 	};
-	
     
     var deleteSpecialty = function(specialty){
 		SpecialtyService.delete(specialty.id).success(
 	       function(data) {
 	          $scope.specialties.splice($scope.specialties.lastIndexOf(specialty),1);
 	       }).error(errorCallback);
-    };
-    
-    $scope.fetch = function() {
-        SpecialtyService.getAll($scope.description).success(
-           function(data, status, headers, config) {
-              $scope.specialties = data;
-           }).error(errorCallback);
     };
     
     $scope.fetch();

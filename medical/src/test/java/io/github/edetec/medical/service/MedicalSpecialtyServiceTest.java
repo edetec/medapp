@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.client.Entity;
@@ -18,8 +19,10 @@ import org.glassfish.jersey.test.TestProperties;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import io.github.edetec.medical.dao.MedicDao;
 import io.github.edetec.medical.dao.MedicalSpecialtyDao;
 import io.github.edetec.medical.exception.BussnessException;
+import io.github.edetec.medical.model.entity.Medic;
 import io.github.edetec.medical.model.entity.MedicalSpecialty;
 import io.github.edetec.medical.model.entity.Patient;
 
@@ -36,15 +39,35 @@ public class MedicalSpecialtyServiceTest extends JerseyTest {
 
 	@BeforeClass
 	public static void init() throws BussnessException {
+		dao = new MedicalSpecialtyDao();
+		MedicDao medicDao = new MedicDao();
+
 		specialty1 = new MedicalSpecialty();
 		specialty1.setDescription("Dermatologist");
-		dao = new MedicalSpecialtyDao();
 		dao.save(specialty1);
+		
+		Medic medic = new Medic();
+		medic.setName("Zé Especialista");
+		medic.setPhone("48 98888 6666");
+		medic.setCpf("99999999999");
+		medic.setCrm("78936");
+		medic.setSpecialties(new ArrayList<MedicalSpecialty>());
+		medic.getSpecialties().add(specialty1);
+		medicDao.save(medic);
 	}
 
 	@Test
+	public void testFetchMedics() {
+		Response output = target("/specialty/").path(specialty1.getId().toString() + "/medics/").request().get();
+		assertEquals("should return status 200", 200, output.getStatus());
+		List<Medic> medics = output.readEntity(new GenericType<List<Medic>>() {
+		});
+		assertTrue("Should return list of medics", medics.size() > 0);
+	}
+	
+	@Test
 	public void testFetchAll() {
-		Response output = target("/specialty").request().get();
+		Response output = target("/specialty/").request().get();
 		assertEquals("should return status 200", 200, output.getStatus());
 		List<MedicalSpecialty> specialties = output.readEntity(new GenericType<List<MedicalSpecialty>>() {
 		});

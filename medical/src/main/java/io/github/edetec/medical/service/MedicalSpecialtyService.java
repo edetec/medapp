@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 
 import io.github.edetec.medical.exception.BussnessException;
 import io.github.edetec.medical.model.MedicalSpecialtyBus;
+import io.github.edetec.medical.model.entity.Medic;
 import io.github.edetec.medical.model.entity.MedicalSpecialty;
 
 @Path("specialty")
@@ -24,6 +25,22 @@ import io.github.edetec.medical.model.entity.MedicalSpecialty;
 @Consumes(MediaType.APPLICATION_JSON)
 public class MedicalSpecialtyService {
 	private MedicalSpecialtyBus bus = new MedicalSpecialtyBus();
+
+	@GET
+	@Path("{id}/medics/")
+	public List<Medic> fetMedicsBySpecialty(@PathParam("id") Long id) {
+		MedicalSpecialty specialty = bus.findById(id);
+		if (specialty == null){
+			throw new WebApplicationException("Medical Specialty not found", Response.Status.NOT_FOUND);
+		}
+
+		// Fix @JsonIgnore don't working in WRITE_ONLY
+		for(Medic medic: specialty.getMedics()){
+			medic.setSpecialties(null);
+		}
+		
+		return specialty.getMedics();
+	}
 
 	@GET
 	public List<MedicalSpecialty> fetchAll(@QueryParam("description") String description) {

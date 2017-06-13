@@ -9,7 +9,6 @@ import io.github.edetec.medical.util.JpaUtil;
 @ApplicationPath("api")
 public class Application extends ResourceConfig {
 	public Application() {
-		JpaUtil.getSessionFactory();
 		packages("io.github.edetec.medical.service");
 	}
 }

@@ -1,6 +1,11 @@
 MedApp.factory("SpecialtyService", function($http) {
  	
  	var URI = "api/specialty/";
+    
+    var _getMedics = function(specialty_id){
+    	return $http.get(URI + specialty_id + "/medics/");
+    };
+    
     var _getAll = function(description) {
     	var config = {}
     	if (description){
@@ -22,6 +27,7 @@ MedApp.factory("SpecialtyService", function($http) {
     };
  
     return {
+    	getMedics: _getMedics,
         getAll : _getAll,
         save : _save,
         update : _update,

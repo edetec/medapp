@@ -1,7 +1,3 @@
-/**
- * Alerts Controller
- */
-
 MedApp.controller('MedicCtrl', MedicCtrl);
 
 function MedicCtrl($scope, MedicService, SpecialtyService, $ngBootbox) {
