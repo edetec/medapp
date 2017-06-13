@@ -7,7 +7,7 @@ import io.github.edetec.medical.util.JpaUtil;
 abstract class AbstractDao {
 	
 	public Session openSession(){
-		return JpaUtil.getSessionFactory().openSession();
+		return JpaUtil.getSession();
 	}
 
 }
